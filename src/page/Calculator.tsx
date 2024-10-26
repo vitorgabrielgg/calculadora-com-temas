@@ -1,3 +1,9 @@
+import { CalculatorContainer } from "./styles";
+
 export const Calculator = () => {
-  return <div>Calculator</div>;
+  return (
+    <CalculatorContainer>
+      <div className="container_box"></div>
+    </CalculatorContainer>
+  );
 };
