@@ -1,9 +1,12 @@
+import { Header } from "../components";
 import { CalculatorContainer } from "./styles";
 
 export const Calculator = () => {
   return (
     <CalculatorContainer>
-      <div className="container_box"></div>
+      <div className="container_box">
+        <Header />
+      </div>
     </CalculatorContainer>
   );
 };
