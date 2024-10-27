@@ -1,3 +1,4 @@
+import { ThemeToggleItem } from "../ThemeToggleItem";
 import { ThemeToggleContainer } from "./styles";
 
 export const ThemeToggle = () => {
@@ -11,7 +12,11 @@ export const ThemeToggle = () => {
           ))}
         </div>
 
-        <div className="toggle"></div>
+        <div className="toggle">
+          <ThemeToggleItem className="btn_theme_1" />
+          <ThemeToggleItem className="btn_theme_2" />
+          <ThemeToggleItem className="btn_theme_3" />
+        </div>
       </div>
     </ThemeToggleContainer>
   );
