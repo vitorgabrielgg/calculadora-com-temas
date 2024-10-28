@@ -1,4 +1,4 @@
-import { Header } from "../components";
+import { CalculatorScreen, Header } from "../components";
 import { CalculatorContainer } from "./styles";
 
 export const Calculator = () => {
@@ -6,6 +6,7 @@ export const Calculator = () => {
     <CalculatorContainer>
       <div className="container_box">
         <Header />
+        <CalculatorScreen />
       </div>
     </CalculatorContainer>
   );
