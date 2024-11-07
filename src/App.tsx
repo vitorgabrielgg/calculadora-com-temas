@@ -1,11 +1,13 @@
 import { ThemeProvider } from "styled-components";
 import { Calculator } from "./page/Calculator";
 import { GlobalStyle } from "./styles/globalStyle";
-import { theme1 } from "./styles/themes";
+import { useTheme } from "./hooks";
 
 function App() {
+  const { theme } = useTheme();
+
   return (
-    <ThemeProvider theme={theme1}>
+    <ThemeProvider theme={theme}>
       <Calculator />
       <GlobalStyle />
     </ThemeProvider>
