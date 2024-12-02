@@ -29,7 +29,7 @@ export const ThemeToggleContainer = styled.div`
       height: 1.9rem;
       border-radius: 1rem;
       background-color: ${(props) =>
-        props.theme.colors.bg_togglebox_and_keypad};
+        props.theme.colors?.bg_togglebox_and_keypad};
       display: flex;
       align-items: center;
       position: relative;

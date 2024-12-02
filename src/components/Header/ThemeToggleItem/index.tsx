@@ -1,9 +1,29 @@
+import { useTheme } from "../../../hooks";
 import { ThemeToggleItemContainer } from "./styles";
+import { ThemeType } from "../../../contexts";
 
-export const ThemeToggleItem = ({ className }: { className: string }) => {
+interface ThemeToggleItemProps {
+  className: string;
+  ariaLabel: string;
+  themeString: ThemeType;
+}
+
+export const ThemeToggleItem = ({
+  className,
+  ariaLabel,
+  themeString,
+}: ThemeToggleItemProps) => {
+  const { theme, handleChangeTheme } = useTheme();
+
+  const opacity = className.includes(theme.title) ? "opacity_100" : "opacity_0";
+
   return (
     <ThemeToggleItemContainer
-      className={`color_transition ${className}`}
+      aria-label={ariaLabel}
+      className={`color_transition ${opacity} ${className}`}
+      onClick={() => {
+        handleChangeTheme(themeString);
+      }}
     ></ThemeToggleItemContainer>
   );
 };
