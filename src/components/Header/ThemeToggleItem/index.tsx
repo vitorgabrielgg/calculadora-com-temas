@@ -20,7 +20,7 @@ export const ThemeToggleItem = ({
   return (
     <ThemeToggleItemContainer
       aria-label={ariaLabel}
-      className={`color_transition ${opacity} ${className}`}
+      className={`${opacity} ${className}`}
       onClick={() => {
         handleChangeTheme(themeString);
       }}

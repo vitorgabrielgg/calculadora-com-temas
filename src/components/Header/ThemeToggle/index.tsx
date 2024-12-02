@@ -12,7 +12,7 @@ export const ThemeToggle = () => {
           ))}
         </div>
 
-        <div className="toggle">
+        <div className="toggle color_transition">
           <ThemeToggleItem
             className="btn_theme1"
             ariaLabel="toggle item 1"

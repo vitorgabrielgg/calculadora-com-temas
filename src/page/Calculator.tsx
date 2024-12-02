@@ -3,7 +3,7 @@ import { CalculatorContainer } from "./styles";
 
 export const Calculator = () => {
   return (
-    <CalculatorContainer>
+    <CalculatorContainer className="color_transition">
       <div className="container_box">
         <Header />
         <CalculatorScreen />

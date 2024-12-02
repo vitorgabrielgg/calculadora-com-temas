@@ -3,7 +3,7 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export const Header = () => {
   return (
-    <HeaderContainer>
+    <HeaderContainer className="color_transition">
       <h1>calc</h1>
       <ThemeToggle />
     </HeaderContainer>

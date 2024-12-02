@@ -97,7 +97,7 @@ const keysArray: IKeyItem[] = [
 
 export const CalculatorKeyboard = () => {
   return (
-    <CalculatorKeyboardContainer>
+    <CalculatorKeyboardContainer className="color_transition">
       {keysArray.map((key, i) => (
         <KeyItem {...key} key={i} />
       ))}
