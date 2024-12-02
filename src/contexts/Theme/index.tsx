@@ -1,16 +1,16 @@
 import { createContext, ReactNode, useState } from "react";
 
-type ThemeType = "theme1" | "theme2" | "theme3";
+export type ThemeType = "theme1" | "theme2" | "theme3";
 
 interface IThemeContext {
   theme: ThemeType;
   setTheme: (theme: ThemeType) => void;
 }
 
-const themeLocalStorage = JSON.parse(localStorage.getItem("theme")!);
+const themeLocalStorage = localStorage.getItem("theme");
 
 const initialStateContext: IThemeContext = {
-  theme: themeLocalStorage ? themeLocalStorage : "theme1",
+  theme: themeLocalStorage ? JSON.parse(themeLocalStorage) : "theme1",
   setTheme: () => {},
 };
 

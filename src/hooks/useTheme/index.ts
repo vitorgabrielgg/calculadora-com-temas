@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { theme1, theme2, theme3 } from "../../styles/themes";
-import { ThemeContext } from "../../contexts";
+import { ThemeContext, ThemeType } from "../../contexts";
 
 export const useTheme = () => {
   const { theme, setTheme } = useContext(ThemeContext);
@@ -17,8 +17,13 @@ export const useTheme = () => {
     theme3,
   };
 
+  const handleChangeTheme = (theme: ThemeType) => {
+    setTheme(theme);
+    localStorage.setItem("theme", JSON.stringify(theme));
+  };
+
   return {
     theme: themes[theme],
-    setTheme,
+    handleChangeTheme,
   };
 };
