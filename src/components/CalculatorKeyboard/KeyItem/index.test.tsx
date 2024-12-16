@@ -1,6 +1,8 @@
-import { render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { KeyItem } from ".";
 import { IKeyItem } from "../../../@types/keyItem";
+import { Calculator } from "../../../page/Calculator";
+import userEvent from "@testing-library/user-event";
 
 describe("Show Keys", () => {
   function getKey(data: IKeyItem) {
@@ -82,3 +84,33 @@ describe("Show Keys", () => {
     expectKey(key, equalKeyData.className, equalKeyData.keyText);
   });
 });
+
+describe("Type on the keypad", () => {
+  it("should show the number when it has been typed", async () => {
+    const keyItemData: IKeyItem = {
+      keyText: "1",
+      className: "number",
+      type: "number",
+    };
+
+    renderCalculator();
+
+    const numberKey = screen.getByLabelText(
+      `${keyItemData.type}: ${keyItemData.keyText}`
+    );
+
+    await act(async () => {
+      await userEvent.click(numberKey);
+    });
+
+    const calculatorCurrentValue = screen.getByLabelText(
+      "calculator_current_value"
+    );
+
+    expect(calculatorCurrentValue).toHaveTextContent(keyItemData.keyText);
+  });
+});
+
+const renderCalculator = () => {
+  return render(<Calculator />);
+};
