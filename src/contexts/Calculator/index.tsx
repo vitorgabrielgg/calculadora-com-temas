@@ -10,7 +10,7 @@ type ActionTypes = "TYPE_NUMBER";
 
 interface IAction {
   type: ActionTypes;
-  payload: {
+  payload?: {
     number: string;
   };
 }
@@ -34,10 +34,19 @@ export const CalculatorContext = createContext<ICalculatorContext>({
 const calculatorReducer = (state: ICalculatorState, action: IAction) => {
   switch (action.type) {
     case "TYPE_NUMBER": {
-      return {
-        ...state,
-        currentValue: state.currentValue + action.payload.number,
-      };
+      // Verifica se o payload é um '.' e se o currentValue já contém um '.'
+      if (action.payload?.number === "." && state.currentValue.includes(".")) {
+        return state;
+      } else {
+        // Se não houver valor no currentValue e se o payload é um '.' será adicionado um '0' antes das casas decimais
+        return {
+          ...state,
+          currentValue:
+            !state.currentValue && action.payload?.number === "."
+              ? `0${state.currentValue + action.payload?.number}`
+              : state.currentValue + action.payload?.number,
+        };
+      }
     }
   }
 };

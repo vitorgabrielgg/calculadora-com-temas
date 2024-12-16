@@ -1,4 +1,4 @@
-type KeyType = "number" | "operator" | "delete" | "reset" | "equal";
+export type KeyType = "number" | "operator" | "delete" | "reset" | "equal";
 
 export interface IKeyItem {
   className: string;

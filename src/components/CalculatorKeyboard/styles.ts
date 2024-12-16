@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CalculatorKeyboardContainer = styled.section`
-  background-color: ${(props) => props.theme.colors.bg_togglebox_and_keypad};
+  background-color: ${(props) => props.theme.colors?.bg_togglebox_and_keypad};
   border-radius: 0.6rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const CalculatorScreenContainer = styled.section`
-  background-color: ${(props) => props.theme.colors.bg_screen};
-  color: ${(props) => props.theme.colors.text_screen_and_header};
+  background-color: ${(props) => props.theme.colors?.bg_screen};
+  color: ${(props) => props.theme.colors?.text_screen_and_header};
   height: 7rem;
   border-radius: 0.6rem;
   display: flex;

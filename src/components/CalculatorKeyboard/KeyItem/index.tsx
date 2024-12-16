@@ -1,7 +1,10 @@
-import { IKeyItem } from "../../../@types/keyItem";
+import { IKeyItem, KeyType } from "../../../@types/keyItem";
+import { useCalculator } from "../../../hooks";
 import { KeyItemContainer } from "./styles";
 
 export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
+  const { handleTypeNumber } = useCalculator();
+
   const handleAriaLabel = (): string => {
     if (type === "number" || type === "operator") {
       return `${type}: ${keyText}`;
@@ -10,10 +13,15 @@ export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
     }
   };
 
+  const keyFunctions: Record<KeyType, () => void> = {
+    number: () => handleTypeNumber(keyText),
+  };
+
   return (
     <KeyItemContainer
       className={`color_transition ${className}`}
       aria-label={handleAriaLabel()}
+      onClick={keyFunctions[type]}
     >
       <p className="color_transition">{keyText}</p>
     </KeyItemContainer>

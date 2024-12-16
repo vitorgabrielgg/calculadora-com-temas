@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CalculatorContainer = styled.div`
-  background: ${(props) => props.theme.colors.bg_main};
+  background: ${(props) => props.theme.colors?.bg_main};
   min-height: 100vh;
   width: 100%;
 
