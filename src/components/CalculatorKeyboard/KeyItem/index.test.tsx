@@ -86,7 +86,7 @@ describe("Show Keys", () => {
 });
 
 describe("Type on the keypad", () => {
-  it("should show the number when it has been typed", async () => {
+  it("should show a number when it has been typed", async () => {
     const keyItemData: IKeyItem = {
       keyText: "1",
       className: "number",
@@ -108,6 +108,47 @@ describe("Type on the keypad", () => {
     );
 
     expect(calculatorCurrentValue).toHaveTextContent(keyItemData.keyText);
+  });
+
+  it("should delete a number on the calculator", async () => {
+    const deleteKeyData: IKeyItem = {
+      keyText: "DEL",
+      className: "delete",
+      type: "delete",
+    };
+
+    const numberKeyData: IKeyItem = {
+      className: "number",
+      type: "number",
+      keyText: "2",
+    };
+
+    renderCalculator();
+
+    const numberKey = screen.getByLabelText(
+      `${numberKeyData.type}: ${numberKeyData.keyText}`
+    );
+
+    await act(async () => {
+      await userEvent.click(numberKey);
+      await userEvent.click(numberKey);
+    });
+
+    const calculatorCurrentValue = screen.getByLabelText(
+      "calculator_current_value"
+    );
+
+    expect(calculatorCurrentValue.textContent).toEqual(
+      numberKeyData.keyText + numberKeyData.keyText
+    );
+
+    const deleteKey = screen.getByLabelText(`${deleteKeyData.type}`);
+
+    await act(async () => {
+      await userEvent.click(deleteKey);
+    });
+
+    expect(calculatorCurrentValue.textContent).toEqual(numberKeyData.keyText);
   });
 });
 
