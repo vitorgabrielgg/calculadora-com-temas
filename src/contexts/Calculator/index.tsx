@@ -6,7 +6,7 @@ interface ICalculatorState {
   operator: string;
 }
 
-type ActionTypes = "TYPE_NUMBER";
+type ActionTypes = "TYPE_NUMBER" | "TYPE_DELETE";
 
 interface IAction {
   type: ActionTypes;
@@ -47,6 +47,15 @@ const calculatorReducer = (state: ICalculatorState, action: IAction) => {
               : state.currentValue + action.payload?.number,
         };
       }
+    }
+    case "TYPE_DELETE": {
+      return {
+        ...state,
+        currentValue: state.currentValue.slice(
+          0,
+          state.currentValue.length - 1
+        ),
+      };
     }
   }
 };

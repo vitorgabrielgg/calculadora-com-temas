@@ -10,10 +10,15 @@ export const useCalculator = () => {
     dispatch({ type: "TYPE_NUMBER", payload: { number } });
   };
 
+  const handleDeleteNumber = () => {
+    dispatch({ type: "TYPE_DELETE" });
+  };
+
   return {
     currentValue,
     operator,
     previousValue,
     handleTypeNumber,
+    handleDeleteNumber,
   };
 };
