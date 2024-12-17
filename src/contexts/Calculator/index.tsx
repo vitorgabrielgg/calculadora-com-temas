@@ -6,14 +6,14 @@ interface ICalculatorState {
   operator: string;
 }
 
-type ActionTypes = "TYPE_NUMBER" | "TYPE_DELETE";
+type PayloadType = {
+  [key: string]: string;
+};
 
-interface IAction {
-  type: ActionTypes;
-  payload?: {
-    number: string;
-  };
-}
+type IAction =
+  | { type: "TYPE_NUMBER"; payload: PayloadType }
+  | { type: "TYPE_DELETE" }
+  | { type: "TYPE_OPERATOR"; payload: PayloadType };
 
 const initialState: ICalculatorState = {
   currentValue: "",
@@ -35,16 +35,16 @@ const calculatorReducer = (state: ICalculatorState, action: IAction) => {
   switch (action.type) {
     case "TYPE_NUMBER": {
       // Verifica se o payload é um '.' e se o currentValue já contém um '.'
-      if (action.payload?.number === "." && state.currentValue.includes(".")) {
+      if (action.payload.number === "." && state.currentValue.includes(".")) {
         return state;
       } else {
         // Se não houver valor no currentValue e se o payload é um '.' será adicionado um '0' antes das casas decimais
         return {
           ...state,
           currentValue:
-            !state.currentValue && action.payload?.number === "."
-              ? `0${state.currentValue + action.payload?.number}`
-              : state.currentValue + action.payload?.number,
+            !state.currentValue && action.payload.number === "."
+              ? `0${state.currentValue + action.payload.number}`
+              : state.currentValue + action.payload.number,
         };
       }
     }
