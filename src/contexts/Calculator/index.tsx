@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useReducer } from "react";
+import { handleResult } from "../../utils";
 
 interface ICalculatorState {
   previousValue: string;
@@ -56,6 +57,25 @@ const calculatorReducer = (state: ICalculatorState, action: IAction) => {
           state.currentValue.length - 1
         ),
       };
+    }
+    case "TYPE_OPERATOR": {
+      if (!state.previousValue) {
+        return {
+          operator: action.payload.operator,
+          previousValue: state.currentValue ? state.currentValue : "0",
+          currentValue: "",
+        };
+      } else {
+        return {
+          operator: action.payload.operator,
+          previousValue: handleResult(
+            state.previousValue,
+            state.currentValue,
+            state.operator
+          ),
+          currentValue: "",
+        };
+      }
     }
   }
 };

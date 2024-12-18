@@ -14,11 +14,16 @@ export const useCalculator = () => {
     dispatch({ type: "TYPE_DELETE" });
   };
 
+  const handleTypeOperator = (operator: string) => {
+    dispatch({ type: "TYPE_OPERATOR", payload: { operator } });
+  };
+
   return {
     currentValue,
     operator,
     previousValue,
     handleTypeNumber,
     handleDeleteNumber,
+    handleTypeOperator,
   };
 };
