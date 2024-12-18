@@ -18,6 +18,10 @@ export const useCalculator = () => {
     dispatch({ type: "TYPE_OPERATOR", payload: { operator } });
   };
 
+  const handleEqual = () => {
+    dispatch({ type: "TYPE_EQUAL" });
+  };
+
   return {
     currentValue,
     operator,
@@ -25,5 +29,6 @@ export const useCalculator = () => {
     handleTypeNumber,
     handleDeleteNumber,
     handleTypeOperator,
+    handleEqual,
   };
 };

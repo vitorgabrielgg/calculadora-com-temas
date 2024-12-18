@@ -3,8 +3,12 @@ import { useCalculator } from "../../../hooks";
 import { KeyItemContainer } from "./styles";
 
 export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
-  const { handleDeleteNumber, handleTypeNumber, handleTypeOperator } =
-    useCalculator();
+  const {
+    handleDeleteNumber,
+    handleTypeNumber,
+    handleTypeOperator,
+    handleEqual,
+  } = useCalculator();
 
   const handleAriaLabel = (): string => {
     if (type === "number" || type === "operator") {
@@ -18,6 +22,7 @@ export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
     number: () => handleTypeNumber(keyText),
     delete: () => handleDeleteNumber(),
     operator: () => handleTypeOperator(keyText),
+    equal: () => handleEqual(),
   };
 
   return (
