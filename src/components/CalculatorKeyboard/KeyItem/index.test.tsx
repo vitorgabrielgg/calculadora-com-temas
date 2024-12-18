@@ -3,6 +3,7 @@ import { KeyItem } from ".";
 import { IKeyItem } from "../../../@types/keyItem";
 import { Calculator } from "../../../page/Calculator";
 import userEvent from "@testing-library/user-event";
+import { handleResult } from "../../../utils";
 
 describe("Show Keys", () => {
   function getKey(data: IKeyItem) {
@@ -201,6 +202,56 @@ describe("Type on the keypad", () => {
     expect(operatorValue.textContent).toEqual(operatorKeyData.keyText);
     expect(calculatorPreviousValue.textContent).toEqual(
       numberKeyData.keyText + numberKeyData.keyText
+    );
+  });
+
+  it("should show the operation result when the equal key has been typed", async () => {
+    const operatorKeyData: IKeyItem = {
+      keyText: "+",
+      className: "operator",
+      type: "operator",
+    };
+
+    const numberKeyData: IKeyItem = {
+      className: "number",
+      type: "number",
+      keyText: "2",
+    };
+
+    const equalKeyData: IKeyItem = {
+      className: "equal",
+      type: "equal",
+      keyText: "=",
+    };
+
+    renderCalculator();
+
+    const numberKey = screen.getByLabelText(
+      `${numberKeyData.type}: ${numberKeyData.keyText}`
+    );
+    const operatorKey = screen.getByLabelText(
+      `${operatorKeyData.type}: ${operatorKeyData.keyText}`
+    );
+
+    const equalKey = screen.getByLabelText(`${equalKeyData.type}`);
+
+    await act(async () => {
+      await userEvent.click(numberKey);
+      await userEvent.click(operatorKey);
+      await userEvent.click(numberKey);
+      await userEvent.click(equalKey);
+    });
+
+    const calculatorCurrentValue = screen.getByLabelText(
+      "calculator_current_value"
+    );
+
+    expect(calculatorCurrentValue.textContent).toEqual(
+      handleResult(
+        numberKey.textContent!,
+        numberKey.textContent!,
+        operatorKey.textContent!
+      )
     );
   });
 });
