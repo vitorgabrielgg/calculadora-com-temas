@@ -254,6 +254,64 @@ describe("Type on the keypad", () => {
       )
     );
   });
+
+  it("should reset the calculator values", async () => {
+    const operatorKeyData: IKeyItem = {
+      keyText: "+",
+      className: "operator",
+      type: "operator",
+    };
+
+    const numberKeyData: IKeyItem = {
+      className: "number",
+      type: "number",
+      keyText: "2",
+    };
+
+    const resetKeyData: IKeyItem = {
+      className: "reset",
+      type: "reset",
+      keyText: "RESET",
+    };
+
+    renderCalculator();
+
+    const numberKey = screen.getByLabelText(
+      `${numberKeyData.type}: ${numberKeyData.keyText}`
+    );
+
+    const operatorKey = screen.getByLabelText(
+      `${operatorKeyData.type}: ${operatorKeyData.keyText}`
+    );
+
+    await act(async () => {
+      await userEvent.click(numberKey);
+      await userEvent.click(operatorKey);
+      await userEvent.click(numberKey);
+    });
+
+    const calculatorCurrentValue = screen.getByLabelText(
+      "calculator_current_value"
+    );
+    const calculatorPreviousValue = screen.getByLabelText(
+      "calculator_previous_value"
+    );
+    const operatorValue = screen.getByLabelText("calculator_operator");
+
+    expect(calculatorCurrentValue.textContent).toEqual(numberKeyData.keyText);
+    expect(operatorValue.textContent).toEqual(operatorKeyData.keyText);
+    expect(calculatorPreviousValue.textContent).toEqual(numberKeyData.keyText);
+
+    const resetKey = screen.getByLabelText(`${resetKeyData.type}`);
+
+    await act(async () => {
+      await userEvent.click(resetKey);
+    });
+
+    expect(calculatorCurrentValue.textContent).toEqual("0");
+    expect(operatorValue.textContent).toEqual("");
+    expect(calculatorPreviousValue.textContent).toEqual("");
+  });
 });
 
 const renderCalculator = () => {
