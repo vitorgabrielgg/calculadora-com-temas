@@ -150,6 +150,59 @@ describe("Type on the keypad", () => {
 
     expect(calculatorCurrentValue.textContent).toEqual(numberKeyData.keyText);
   });
+
+  it("should replace the currentValue to previousValue when any operator has been typed", async () => {
+    const operatorKeyData: IKeyItem = {
+      keyText: "+",
+      className: "operator",
+      type: "operator",
+    };
+
+    const numberKeyData: IKeyItem = {
+      className: "number",
+      type: "number",
+      keyText: "2",
+    };
+
+    renderCalculator();
+
+    const numberKey = screen.getByLabelText(
+      `${numberKeyData.type}: ${numberKeyData.keyText}`
+    );
+
+    await act(async () => {
+      await userEvent.click(numberKey);
+      await userEvent.click(numberKey);
+    });
+
+    const calculatorCurrentValue = screen.getByLabelText(
+      "calculator_current_value"
+    );
+
+    expect(calculatorCurrentValue.textContent).toEqual(
+      numberKeyData.keyText + numberKeyData.keyText
+    );
+
+    const operatorKey = screen.getByLabelText(
+      `${operatorKeyData.type}: ${operatorKeyData.keyText}`
+    );
+
+    const calculatorPreviousValue = screen.getByLabelText(
+      "calculator_previous_value"
+    );
+
+    const operatorValue = screen.getByLabelText("calculator_operator");
+
+    await act(async () => {
+      await userEvent.click(operatorKey);
+    });
+
+    expect(calculatorCurrentValue.textContent).toEqual("0");
+    expect(operatorValue.textContent).toEqual(operatorKeyData.keyText);
+    expect(calculatorPreviousValue.textContent).toEqual(
+      numberKeyData.keyText + numberKeyData.keyText
+    );
+  });
 });
 
 const renderCalculator = () => {
