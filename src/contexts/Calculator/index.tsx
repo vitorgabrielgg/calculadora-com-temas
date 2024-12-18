@@ -15,7 +15,8 @@ type IAction =
   | { type: "TYPE_NUMBER"; payload: PayloadType }
   | { type: "TYPE_DELETE" }
   | { type: "TYPE_OPERATOR"; payload: PayloadType }
-  | { type: "TYPE_EQUAL" };
+  | { type: "TYPE_EQUAL" }
+  | { type: "TYPE_RESET" };
 
 const initialState: ICalculatorState = {
   currentValue: "",
@@ -85,6 +86,13 @@ const calculatorReducer = (state: ICalculatorState, action: IAction) => {
           state.currentValue,
           state.operator
         ),
+        previousValue: "",
+        operator: "",
+      };
+    }
+    case "TYPE_RESET": {
+      return {
+        currentValue: "",
         previousValue: "",
         operator: "",
       };

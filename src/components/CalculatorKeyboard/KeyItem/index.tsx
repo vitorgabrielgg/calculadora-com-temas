@@ -8,6 +8,7 @@ export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
     handleTypeNumber,
     handleTypeOperator,
     handleEqual,
+    handleReset,
   } = useCalculator();
 
   const handleAriaLabel = (): string => {
@@ -23,6 +24,7 @@ export const KeyItem = ({ className, keyText, type }: IKeyItem) => {
     delete: () => handleDeleteNumber(),
     operator: () => handleTypeOperator(keyText),
     equal: () => handleEqual(),
+    reset: () => handleReset(),
   };
 
   return (

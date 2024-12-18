@@ -22,6 +22,10 @@ export const useCalculator = () => {
     dispatch({ type: "TYPE_EQUAL" });
   };
 
+  const handleReset = () => {
+    dispatch({ type: "TYPE_RESET" });
+  };
+
   return {
     currentValue,
     operator,
@@ -30,5 +34,6 @@ export const useCalculator = () => {
     handleDeleteNumber,
     handleTypeOperator,
     handleEqual,
+    handleReset,
   };
 };
