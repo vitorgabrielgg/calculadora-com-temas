@@ -20,9 +20,9 @@
 </p>
 
 <p align="center">
-    <img src="./.github/images/calculator-theme-1.png" alt="Calculadora com o tema 1" style="width: 100%; max-width: 500px; height: 500px">
-    <img src="./.github/images/calculator-theme-2.png" alt="Calculadora com o tema 2" style="width: 100%; max-width: 500px; height: 500px">
-    <img src="./.github/images/calculator-theme-3.png" alt="Calculadora com o tema 3" style="width: 100%; max-width: 500px; height: 500px">
+    <img src="./.github/images/calculator-theme-1.png" alt="Calculadora com o tema 1" style="max-width: 500px; height: 500px">
+    <img src="./.github/images/calculator-theme-2.png" alt="Calculadora com o tema 2" style="max-width: 500px; height: 500px">
+    <img src="./.github/images/calculator-theme-3.png" alt="Calculadora com o tema 3" style="max-width: 500px; height: 500px">
 </p>
 
 <h2 id="sobre">📌 Sobre</h2>
